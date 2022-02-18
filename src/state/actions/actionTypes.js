@@ -4,4 +4,6 @@ export const ActionType = {
   UPDATE_POST : "UPDATE_POST",
   DELETE_POST : "DELETE_POST",
   LIKE_POST : "LIKE_POST",
+  LOGOUT : "LOGOUT",
+  AUTH : "AUTH",
 }

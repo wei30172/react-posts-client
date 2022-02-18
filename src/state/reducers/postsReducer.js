@@ -1,6 +1,6 @@
 import { ActionType } from "../actions/actionTypes"
 
-export const postReducer =  (posts = [], action) => {
+export const postsReducer =  (posts = [], action) => {
   switch (action.type) {
     case ActionType.FECTCH_POSTS:
       return action.payload

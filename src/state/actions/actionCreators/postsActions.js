@@ -1,4 +1,4 @@
-import * as postsAPI from '../../../api/postsAPI'
+import * as postsAPI from '../../../api'
 import { ActionType } from "../actionTypes"
 
 export const fetchPosts = () => async (dispatch) => {

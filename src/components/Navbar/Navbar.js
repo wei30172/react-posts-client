@@ -13,22 +13,26 @@ const Navbar = () => {
   const navigate = useNavigate()
   const location = useLocation()
   
-  const logout = () => {
+  const handleLogout = () => {
     dispatch({ type: ActionType.LOGOUT })
     navigate('/auth')
     setUser(null)
   }
 
   useEffect(() => {
+    const logout = () => {
+      dispatch({ type: ActionType.LOGOUT })
+      navigate('/auth')
+      setUser(null)
+    }
     const token = user?.token
     if (token) {
       const decodedToken = decode(token)
       // if token expired
       if (decodedToken.exp * 1000 < new Date().getTime()) logout()
     }
-    
     setUser(JSON.parse(localStorage.getItem('profile')))
-  }, [location])
+  }, [location, dispatch, navigate, user?.token])
 
   return (
     <AppBar
@@ -55,7 +59,7 @@ const Navbar = () => {
               {user.result.name.charAt(0)}
             </Avatar>
             <Typography variant="h6">{user.result.name}</Typography>
-            <Button variant="contained" color="secondary" onClick={logout}>Logout</Button>
+            <Button variant="contained" color="secondary" onClick={handleLogout}>Logout</Button>
           </ProfileDiv>
         ) : (
           <Button component={Link} to="/auth" variant="contained" color="primary">Log In</Button>

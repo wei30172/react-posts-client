@@ -41,7 +41,7 @@ export default function Form({ currentId, setCurrentId }) {
     return (
       <Paper sx={PaperStyle} elevation={6}>
         <Typography variant="subtitle2" align="center">
-          Please Log In to create your own memories and like other's memories.
+          Please Log In to create your own posts and like other's posts.
         </Typography>
       </Paper>
     );

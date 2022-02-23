@@ -5,6 +5,7 @@ import { getPost, getPostsBySearch } from '../../state/actions/actionCreators/po
 import { useDispatch, useSelector } from 'react-redux'
 import { LoadingPaperStyle, CardDiv, SectionDiv, ImageDiv, MediaImg, RecommendedDiv } from './styles'
 import moment from 'moment'
+import CommentSection from '../../components/CommentSection/CommentSection'
 
 const PostDetails = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts)
@@ -48,10 +49,15 @@ const PostDetails = () => {
           <Typography gutterBottom variant="body1" component="p">{post.message}</Typography>
           <Typography variant="h6">Created by: {post.name}</Typography>
           <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
+          <Divider style={{ margin: '20px 0' }} />
+          <CommentSection post={post} />
         </SectionDiv>
         <ImageDiv>
           <MediaImg src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
         </ImageDiv>
+      </CardDiv>
+      <CardDiv>
+        
       </CardDiv>
       {/* recommended Posts */}
       {!!recommendedPosts.length && (

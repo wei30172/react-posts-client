@@ -3,8 +3,6 @@ import { styled } from '@mui/system'
 import { Box } from '@mui/material'
 import Navbar from '../Navbar/Navbar'
 
-const drawerWidth = 240
-
 const Page = styled('div')(
   ({ theme }) => ({
     paddingTop: theme.spacing(8),

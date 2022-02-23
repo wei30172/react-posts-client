@@ -1,11 +1,12 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes ,Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes ,Route, Navigate } from 'react-router-dom'
 import { Container } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { pink } from '@mui/material/colors'
+import Layout from './components/Layout/Layout'
 import Home from './pages/Home/Home'
 import Auth from './pages/Auth/Auth'
-import Navbar from './components/Navbar/Navbar'
+import PostDetails from './pages/PostDetails/PostDetails'
 
 const theme = createTheme({
   palette: {
@@ -23,15 +24,21 @@ const theme = createTheme({
 })
 
 function App() {
+  const user = JSON.parse(localStorage.getItem('profile'))
+
   return (
     <Router>
       <ThemeProvider theme={theme}>
-        <Container maxWidth="lg">
-          <Navbar />
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/auth' element={<Auth />} />
-          </Routes>
+        <Container maxWidth="xl">
+          <Layout>
+            <Routes>
+              <Route path='/' element={<Navigate to="/posts" />} />
+              <Route path="/posts" element={<Home/>} />
+              <Route path="/posts/search" element={<Home/>} />
+              <Route path="/posts/:id" element={<PostDetails/>} />
+              <Route path='/auth' element={(!user ? <Auth /> : <Navigate to="/posts" />)} />
+            </Routes>
+          </Layout>
         </Container>
       </ThemeProvider>
     </Router>

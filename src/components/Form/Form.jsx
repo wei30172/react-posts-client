@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { createPost, updatePost } from '../../state/actions/actionCreators/postsActions'
 import { Paper, Typography, Button, TextField } from '@mui/material'
 import { FormDiv, FileInputDiv, FieldStyle, ButtonStyle, PaperStyle } from './styles'
@@ -11,8 +12,9 @@ const initialState = { title: '', message: '', tags: '', selectedFile: ''}
 
 export default function Form({ currentId, setCurrentId }) {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [postData, setPostData] = useState(initialState)
-  const post = useSelector(state => currentId ? state.posts.find((post) => post._id === currentId) : null)
+  const post = useSelector(state => currentId ? state.posts.posts.find((post) => post._id === currentId) : null)
   const user = JSON.parse(localStorage.getItem('profile'))
   
   useEffect(()=> {
@@ -28,7 +30,7 @@ export default function Form({ currentId, setCurrentId }) {
     e.preventDefault()
 
     if (currentId === 0) {
-      dispatch(createPost({ ...postData, name: user?.result?.name }))
+      dispatch(createPost({ ...postData, name: user?.result?.name }, navigate))
     } else {
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }))
     }
@@ -37,8 +39,8 @@ export default function Form({ currentId, setCurrentId }) {
 
   if (!user?.result?.name) {
     return (
-      <Paper sx={PaperStyle}>
-        <Typography variant="h6" align="center">
+      <Paper sx={PaperStyle} elevation={6}>
+        <Typography variant="subtitle2" align="center">
           Please Log In to create your own memories and like other's memories.
         </Typography>
       </Paper>
@@ -46,7 +48,7 @@ export default function Form({ currentId, setCurrentId }) {
   }
   
   return (
-    <Paper sx={PaperStyle}>
+    <Paper sx={PaperStyle} elevation={6}>
       <Typography
         variant='h6'
         color={currentId ? 'secondary': 'textSecondary'}

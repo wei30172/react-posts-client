@@ -1,27 +1,58 @@
 import * as postsAPI from '../../../api'
 import { ActionType } from "../actionTypes"
 
-export const fetchPosts = () => async (dispatch) => {
+export const getPosts = (page) => async (dispatch) => {
   try {
-    const { data } = await postsAPI.fetchPosts()
+    dispatch({ type: ActionType.START_LOADING })
+    const { data: { data, currentPage, numberOfPages } } = await postsAPI.fetchPosts(page)
     // console.log(data)
     dispatch({ // action
-      type: ActionType.FECTCH_POSTS,
-      payload: data
+      type: ActionType.FETCH_ALL,
+      payload: { data, currentPage, numberOfPages }
     })
+    dispatch({ type: ActionType.END_LOADING })
   } catch(error) {
     console.log(error)
   }
 }
 
-export const createPost = (post) => async (dispatch) => {
+export const getPost = (id) => async (dispatch) => {
   try {
-    const { data } = await postsAPI.createPost(post)
+    dispatch({ type: ActionType.START_LOADING })
+    const { data } = await postsAPI.fetchPost(id)
     // console.log(data)
-    dispatch({ // action
-      type: ActionType.CREATE_POST,
+    dispatch({
+      type: ActionType.FETCH_POST,
       payload: data
     })
+    dispatch({ type: ActionType.END_LOADING })
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getPostsBySearch = (searchQuery) => async (dispatch) => {
+  try {
+    dispatch({ type: ActionType.START_LOADING })
+    const { data: { data } } = await postsAPI.fetchPostsBySearch(searchQuery)
+    dispatch({ // action
+      type: ActionType.FETCH_BY_SEARCH,
+      payload: data
+    })
+    dispatch({ type: ActionType.END_LOADING })
+  } catch(error) {
+    console.log(error)
+  }
+}
+
+export const createPost = (post, navigate) => async (dispatch) => {
+  try {
+    dispatch({ type: ActionType.START_LOADING })
+    const { data } = await postsAPI.createPost(post)
+    // console.log(data)
+    dispatch({ type: ActionType.CREATE_POST, payload: data })
+    navigate('/')
+    // navigate(`/posts/${data._id}`)
   } catch(error) {
     console.log(error)
   }

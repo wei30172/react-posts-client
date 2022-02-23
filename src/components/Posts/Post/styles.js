@@ -9,6 +9,12 @@ const CardStyle = {
   position: 'relative',
 }
 
+const ButtonBaseStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+}
+
 const MediaStyle = {
   height: 0,
   paddingTop: '50%',
@@ -46,4 +52,4 @@ const ActionsStyle = {
   justifyContent: 'space-between',
 }
 
-export { CardStyle, MediaStyle, OverlayDiv, OverlayBtn, DetailsDiv, TitleDiv, ActionsStyle }
+export { CardStyle, ButtonBaseStyle, MediaStyle, OverlayDiv, OverlayBtn, DetailsDiv, TitleDiv, ActionsStyle }

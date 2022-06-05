@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { signUp, logIn, userAuth } from '../../state/actions/actionCreators/authActions';
+import { signUp, logIn } from '../../state/actions/actionCreators/authActions';
+// import { userAuth } from '../../state/actions/actionCreators/authActions';
 import { Container, Paper, Grid, Typography, Avatar, Button } from '@mui/material'
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
-import { PaperStyle, AvatarStyle, TitleStyle, SubmitButtonStyle, GoogleButtonStyle } from './styles'
-import { GoogleLogin } from 'react-google-login';
+import { PaperStyle, AvatarStyle, TitleStyle, SubmitButtonStyle } from './styles'
+// import { GoogleButtonStyle } from './styles'
+// import { GoogleLogin } from 'react-google-login';
 import Input from '../../components/Auth/Input/Input';
-import Icon from '../../components/Auth/Icon/Icon';
+// import Icon from '../../components/Auth/Icon/Icon';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
 
@@ -38,20 +40,20 @@ const Auth = () => {
     }
   }
 
-  const googleSuccess = async(res) => {
-    const result = res?.profileObj
-    const token = res?.tokenId
-    try {
-      dispatch(userAuth(result, token))
-      navigate('/');
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // const googleSuccess = async(res) => {
+  //   const result = res?.profileObj
+  //   const token = res?.tokenId
+  //   try {
+  //     dispatch(userAuth(result, token))
+  //     navigate('/');
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
-  const googleError = () => {
-    console.log('Google Sign In was unsuccessful. Try again later')
-  }
+  // const googleError = () => {
+  //   console.log('Google Sign In was unsuccessful. Try again later')
+  // }
 
   return (
     <Container component="main" maxWidth="xs">

@@ -58,7 +58,7 @@ export const createPost = (post, navigate) => async (dispatch) => {
     // console.log(data)
     dispatch({ type: ActionType.CREATE_POST, payload: data });
     navigate("/");
-    // navigate(`/posts/${data._id}`)
+    // navigate(`/${data._id}`)
   } catch (error) {
     console.log(error);
   }

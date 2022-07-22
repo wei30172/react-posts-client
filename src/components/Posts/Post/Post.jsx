@@ -39,7 +39,7 @@ export default function Post({ post, setCurrentId }) {
   const user = JSON.parse(localStorage.getItem("profile"));
 
   const openPost = (e) => {
-    navigate(`/posts/${post._id}`);
+    navigate(`/${post._id}`);
   };
 
   const userId = user?.result?.googleId || user?.result?._id;

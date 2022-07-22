@@ -33,7 +33,7 @@ export default function Home() {
   const searchPost = () => {
     if (search.trim()) {
       dispatch(getPostsBySearch({ search, tags: search }));
-      navigate(`/posts/search?searchQuery=${search || "none"}&tags=${search}`);
+      navigate(`/search?searchQuery=${search || "none"}&tags=${search}`);
     } else {
       navigate("/");
     }
@@ -68,6 +68,7 @@ export default function Home() {
                 variant="outlined"
                 label="Search Posts"
                 fullWidth
+                placeholder="Keyword or Title"
               />
               <Button
                 sx={{ marginTop: "10px" }}

@@ -37,13 +37,12 @@ function App() {
         <Container maxWidth="xl">
           <Layout>
             <Routes>
-              <Route path="/" element={<Navigate to="/posts" />} />
-              <Route path="/posts" element={<Home />} />
-              <Route path="/posts/search" element={<Home />} />
-              <Route path="/posts/:id" element={<PostDetails />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/search" element={<Home />} />
+              <Route path="/:id" element={<PostDetails />} />
               <Route
                 path="/auth"
-                element={!user ? <Auth /> : <Navigate to="/posts" />}
+                element={!user ? <Auth /> : <Navigate to="/" />}
               />
             </Routes>
           </Layout>

@@ -46,7 +46,7 @@ const PostDetails = () => {
   }
 
   const openPost = (_id) => {
-    navigate(`/posts/${_id}`);
+    navigate(`/${_id}`);
   };
 
   const recommendedPosts = posts.filter(({ _id }) => _id !== post._id); // remove current post

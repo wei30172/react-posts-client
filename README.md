@@ -2,7 +2,7 @@
 
 Used React, Node.js, Express, and MongoDB to build a simple social media Website.
 
-## Project Screen Shot
+## Project Screenshots
 ![MERN-web3](https://user-images.githubusercontent.com/60259324/180365725-cc92df2e-dcbf-4dc3-95fe-f9fcd03d273e.png)
 ![MERN-web4](https://user-images.githubusercontent.com/60259324/180365732-d7e276bf-e758-4425-aab8-eafc9ca2b7ac.png)
 ![MERN-web6](https://user-images.githubusercontent.com/60259324/180365736-9fbeb2ff-a9c1-4d3e-9734-64861a157b05.png)

@@ -1,41 +1,44 @@
-import * as authAPI from '../../../api'
-import { ActionType } from "../actionTypes"
+import * as authAPI from "../../../api";
+import { ActionType } from "../actionTypes";
 
 export const signUp = (formData, navigate) => async (dispatch) => {
   try {
-    const { data } = await authAPI.signUp(formData)
+    const { data } = await authAPI.signUp(formData);
     // console.log(data)
-    dispatch({ // action
+    dispatch({
+      // action
       type: ActionType.AUTH,
-      payload: data
-    })
-    navigate('/')
-  } catch(error) {
-    console.log(error)
+      payload: data,
+    });
+    navigate("/");
+  } catch (error) {
+    console.log(error);
   }
-}
+};
 
 export const logIn = (formData, navigate) => async (dispatch) => {
   try {
-    const { data } = await authAPI.logIn(formData)
+    const { data } = await authAPI.logIn(formData);
     // console.log(data)
-    dispatch({ // action
+    dispatch({
+      // action
       type: ActionType.AUTH,
-      payload: data
-    })
-    navigate('/')
-  } catch(error) {
-    console.log(error)
+      payload: data,
+    });
+    navigate("/");
+  } catch (error) {
+    console.log(error);
   }
-}
+};
 
 export const userAuth = (result, token) => async (dispatch) => {
   try {
-    dispatch({ // action
+    dispatch({
+      // action
       type: ActionType.AUTH,
-      payload: { result, token }
-    })
-  } catch(error) {
-    console.log(error)
+      payload: { result, token },
+    });
+  } catch (error) {
+    console.log(error);
   }
-}
+};

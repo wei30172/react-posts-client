@@ -1,41 +1,54 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { createPost, updatePost } from '../../state/actions/actionCreators/postsActions'
-import { Paper, Typography, Button, TextField } from '@mui/material'
-import { FormDiv, FileInputDiv, FieldStyle, ButtonStyle, PaperStyle } from './styles'
-import PostAddIcon from '@mui/icons-material/PostAdd'
-import BackspaceIcon from '@mui/icons-material/Backspace'
-import FileBase from 'react-file-base64'
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  createPost,
+  updatePost,
+} from "../../state/actions/actionCreators/postsActions";
+import { Paper, Typography, Button, TextField } from "@mui/material";
+import {
+  FormDiv,
+  FileInputDiv,
+  FieldStyle,
+  ButtonStyle,
+  PaperStyle,
+} from "./styles";
+import PostAddIcon from "@mui/icons-material/PostAdd";
+import BackspaceIcon from "@mui/icons-material/Backspace";
+import FileBase from "react-file-base64";
 
-const initialState = { title: '', message: '', tags: '', selectedFile: ''}
+const initialState = { title: "", message: "", tags: "", selectedFile: "" };
 
 export default function Form({ currentId, setCurrentId }) {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [postData, setPostData] = useState(initialState)
-  const post = useSelector(state => currentId ? state.posts.posts.find((post) => post._id === currentId) : null)
-  const user = JSON.parse(localStorage.getItem('profile'))
-  
-  useEffect(()=> {
-    if(post) setPostData(post)
-  }, [post])
-  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [postData, setPostData] = useState(initialState);
+  const post = useSelector((state) =>
+    currentId ? state.posts.posts.find((post) => post._id === currentId) : null,
+  );
+  const user = JSON.parse(localStorage.getItem("profile"));
+
+  useEffect(() => {
+    if (post) setPostData(post);
+  }, [post]);
+
   const clearPost = () => {
-    setCurrentId(0)
+    setCurrentId(0);
     setPostData(initialState);
-  }
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (currentId === 0) {
-      dispatch(createPost({ ...postData, name: user?.result?.name }, navigate))
+      dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
     } else {
-      dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }))
+      dispatch(
+        updatePost(currentId, { ...postData, name: user?.result?.name }),
+      );
     }
-    clearPost()
-  }
+    clearPost();
+  };
 
   if (!user?.result?.name) {
     return (
@@ -46,22 +59,24 @@ export default function Form({ currentId, setCurrentId }) {
       </Paper>
     );
   }
-  
+
   return (
     <Paper sx={PaperStyle} elevation={6}>
       <Typography
-        variant='h6'
-        color={currentId ? 'secondary': 'textSecondary'}
-        component='h2'
+        variant="h6"
+        color={currentId ? "secondary" : "textSecondary"}
+        component="h2"
         gutterBottom
       >
-        {currentId ? "Editing the Post" : 'Create a New Post'}
+        {currentId ? "Editing the Post" : "Create a New Post"}
       </Typography>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <FormDiv>
           <TextField
             value={postData.title}
-            onChange={(e) => setPostData({ ...postData, title: e.target.value })}
+            onChange={(e) =>
+              setPostData({ ...postData, title: e.target.value })
+            }
             name="title"
             label="Title"
             variant="outlined"
@@ -71,9 +86,11 @@ export default function Form({ currentId, setCurrentId }) {
           />
           <TextField
             value={postData.message}
-            onChange={(e) => setPostData({ ...postData, message: e.target.value })}
-            name="message" 
-            label="Message" 
+            onChange={(e) =>
+              setPostData({ ...postData, message: e.target.value })
+            }
+            name="message"
+            label="Message"
             variant="outlined"
             color="secondary"
             fullWidth
@@ -83,7 +100,9 @@ export default function Form({ currentId, setCurrentId }) {
           />
           <TextField
             value={postData.tags}
-            onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}
+            onChange={(e) =>
+              setPostData({ ...postData, tags: e.target.value.split(",") })
+            }
             name="tags"
             label="Tags (coma separated)"
             variant="outlined"
@@ -95,7 +114,9 @@ export default function Form({ currentId, setCurrentId }) {
             <FileBase
               type="file"
               multiple={false}
-              onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
+              onDone={({ base64 }) =>
+                setPostData({ ...postData, selectedFile: base64 })
+              }
               sx={FieldStyle}
             />
           </FileInputDiv>
@@ -125,5 +146,5 @@ export default function Form({ currentId, setCurrentId }) {
         </FormDiv>
       </form>
     </Paper>
-  )
+  );
 }

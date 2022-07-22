@@ -1,6 +1,6 @@
 const UlStyle = {
-  display: 'flex',
-  justifyContent: 'space-around',
-}
+  display: "flex",
+  justifyContent: "space-around",
+};
 
-export { UlStyle }
+export { UlStyle };

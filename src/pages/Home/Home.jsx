@@ -1,41 +1,49 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { useNavigate, useLocation } from 'react-router-dom'
-import { getPostsBySearch } from '../../state/actions/actionCreators/postsActions'
-import { Container, Grow, Grid, Paper, AppBar, TextField, Button } from '@mui/material'
-import { GridStyle, PaginationStyle, AppBarSearchStyle } from './styles'
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
+import { getPostsBySearch } from "../../state/actions/actionCreators/postsActions";
+import {
+  Container,
+  Grow,
+  Grid,
+  Paper,
+  AppBar,
+  TextField,
+  Button,
+} from "@mui/material";
+import { GridStyle, PaginationStyle, AppBarSearchStyle } from "./styles";
 
-import Posts from '../../components/Posts/Posts';
-import Form from '../../components/Form/Form';
-import Pagination from '../../components/Pagination/Pagination';
+import Posts from "../../components/Posts/Posts";
+import Form from "../../components/Form/Form";
+import Pagination from "../../components/Pagination/Pagination";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-export default function Home () {
-  const [currentId, setCurrentId] = useState(0)
-  const [search, setSearch] = useState('')
-  const dispatch = useDispatch()
-  const query = useQuery()
-  const navigate = useNavigate()
-  const page = query.get('page') || 1
-  const searchQuery = query.get('searchQuery')
+export default function Home() {
+  const [currentId, setCurrentId] = useState(0);
+  const [search, setSearch] = useState("");
+  const dispatch = useDispatch();
+  const query = useQuery();
+  const navigate = useNavigate();
+  const page = query.get("page") || 1;
+  const searchQuery = query.get("searchQuery");
 
   const searchPost = () => {
     if (search.trim()) {
-      dispatch(getPostsBySearch({ search, tags: search }))
-      navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${search}`)
+      dispatch(getPostsBySearch({ search, tags: search }));
+      navigate(`/posts/search?searchQuery=${search || "none"}&tags=${search}`);
     } else {
-      navigate('/')
+      navigate("/");
     }
-  }
+  };
 
   const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
-      searchPost()
+      searchPost();
     }
-  }
+  };
 
   return (
     <Grow in>
@@ -62,22 +70,23 @@ export default function Home () {
                 fullWidth
               />
               <Button
-                sx={{ marginTop: '10px' }}
+                sx={{ marginTop: "10px" }}
                 onClick={searchPost}
                 variant="contained"
-                color="primary">
+                color="primary"
+              >
                 Search
               </Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
-            {(!searchQuery) && (
+            {!searchQuery && (
               <Paper sx={PaginationStyle} elevation={6}>
-              <Pagination page={page}/>
-            </Paper>
+                <Pagination page={page} />
+              </Paper>
             )}
           </Grid>
         </Grid>
       </Container>
     </Grow>
-  )
+  );
 }

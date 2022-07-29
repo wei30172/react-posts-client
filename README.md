@@ -1,6 +1,8 @@
 ## MERN Social Media App
 
 Used React, Node.js, Express, and MongoDB to build a simple social media Website.
+1. Authenticate users with JWT in Node.js. Users can log in to create and modify their own posts.
+2. Users can like others’ posts, leave comments, and search posts based on title or tag.
 
 ## Project Screenshots
 ![MERN-web3](https://user-images.githubusercontent.com/60259324/180365725-cc92df2e-dcbf-4dc3-95fe-f9fcd03d273e.png)
